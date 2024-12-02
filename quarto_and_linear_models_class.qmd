@@ -1,17 +1,35 @@
 ---
-title: "linear_models_and_quarto"
+title: "Linear models and Quarto"
 format: html
+subtitle: "Week 2 Practical"
 author: Space-ace789
 editor: visual
+theme: darkly
+title-block-banner: "#42daec"
+title-block-banner-color: "black"
+number-sections: true 
+toc: true
 ---
+# Quarto Shit
 
-# Linear Models and Quarto
+## Syntax:
 
-##Quarto Shit
+(see the read me for more info, this is just the most useful stuff)
 
-\<\> to embed a link
+\<\> to embed a link <https://raw.githubusercontent.com/rstudio/cheatsheets/main/rmarkdown.pdf> (this is how to make R markdown pretty)
 
-\*\* \*\* makes **bold**
+\*\* \*\* makes **bold**, \* \* makes *italic* and \~\~ \~\~ makes ~~strikethrough~~
+
+To [underline]{.underline} you use formating in the visual section
+
+To do superscript put numbers of text in between \^ \^ e.g. e^-10^\
+To do subscript put numbers or text in between \~ \~ e.g. H~2~O
+
+For more info in how to styl quarto use this link <https://www.productive-r-workflow.com/quarto-tricks>
+
+## Chunk Stuff:
+
+Need to use #\| to add things that affect output of the chunk
 
 ```{r can put title for chunk here (like in Markdown)}
 1 + 1 
@@ -24,10 +42,11 @@ editor: visual
 ```
 
 The `echo: false` option disables the printing of code (only output is displayed).
+The `output: false` option to not show the output (only the code)
 
-## Linear Model Stuff
+# Linear Model Stuff
 
-### Packages
+## Packages
 
 ```{r}
 #| label: Packages
