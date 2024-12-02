@@ -1,0 +1,103 @@
+---
+title: "linear_models_and_quarto"
+format: html
+author: Space-ace789
+editor: visual
+---
+
+# Linear Models and Quarto
+
+##Quarto Shit
+
+\<\> to embed a link
+
+\*\* \*\* makes **bold**
+
+```{r can put title for chunk here (like in Markdown)}
+1 + 1 
+```
+
+```{r}
+#| label: or use the '#|' button to make a title
+#| echo: false
+2 * 2
+```
+
+The `echo: false` option disables the printing of code (only output is displayed).
+
+## Linear Model Stuff
+
+### Packages
+
+```{r}
+#| label: Packages
+#| output: false # means does not show the output
+library(Sleuth3)
+library(ggplot2)
+library(arm)
+```
+
+Using the dataframe case1402, which is from Sleuth3 package. Came from an experiment on effects of drought and 2 low level pollutants (ozone and sulphur dioxide). Used two varieties of soya beans, Forrest and William. Looked at how individual stressors and interactions of them affects them.
+
+### Examining Dataset
+
+```{r}
+head(case1402)
+str(case1402) #lets you see the structure of the dataset
+```
+
+Structure is that there are 30 rows and 5 columns.
+
+```{r}
+summary(case1402)
+```
+
+```{r}
+#| echo: false
+#| outpu: false
+View(case1402)
+```
+
+### Transforming Data
+
+General rule of thumb is that yield data should be log transformed. Can either nest the log() function inside other functions, or the easier way would be to create a new column including log transformed data.
+
+```{r}
+#| Label: Adding Log transformed column
+#| output: false
+case1402$log_William <- log(case1402$William) #Adds log yield column.
+```
+
+\### Graphing Data
+
+Create objects for x and y axis labels.
+
+```{r}
+#| Label: Creating axis title objects
+#| outout: false
+
+xlabel <- expression(paste("Ozone (", mu,"L L"^"-1",")"))
+#expression paste used as have complex symbols, cant just enter as a string. 
+ylabel <- expression(paste("Log Yield (kg ha"^"-1",")"))
+```
+
+Visualise data in a panel plot of yield versus ozone, facetted by water stress:
+
+```{r}
+#| Label: Visualising Data
+#| echo: false 
+
+Fig1 <- case1402 |> 
+  ggplot() +
+  geom_point(aes(x = O3, y = log_William, colour = Stress)) +
+  facet_wrap(. ~ Stress) +
+  labs(x = xlabel, y = ylabel) +
+  xlim(0, 0.1) +
+  theme_dark() +
+  ggtitle("Fig 1: Log transformed yield of William variety soya beans as a function of low-level ozone and water stress")
+
+
+mytheme <- theme(plot.title = element_text(size=(8)))
+print(Fig1 + mytheme)
+
+```
