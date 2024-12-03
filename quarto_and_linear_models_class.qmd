@@ -5,11 +5,12 @@ subtitle: "Week 2 Practical"
 author: Space-ace789
 editor: visual
 theme: darkly
-title-block-banner: "#42daec"
-title-block-banner-color: "black"
+title-block-banner: "#249ea0"
+title-block-banner-color: "white"
 number-sections: true 
 toc: true
 ---
+
 # Quarto Shit
 
 ## Syntax:
@@ -41,8 +42,7 @@ Need to use #\| to add things that affect output of the chunk
 2 * 2
 ```
 
-The `echo: false` option disables the printing of code (only output is displayed).
-The `output: false` option to not show the output (only the code)
+The `echo: false` option disables the printing of code (only output is displayed). The `output: false` option to not show the output (only the code)
 
 # Linear Model Stuff
 
@@ -58,26 +58,29 @@ library(arm)
 
 Using the dataframe case1402, which is from Sleuth3 package. Came from an experiment on effects of drought and 2 low level pollutants (ozone and sulphur dioxide). Used two varieties of soya beans, Forrest and William. Looked at how individual stressors and interactions of them affects them.
 
-### Examining Dataset
+## Examining Dataset
 
 ```{r}
+#| output: false
 head(case1402)
 str(case1402) #lets you see the structure of the dataset
 ```
 
+
 Structure is that there are 30 rows and 5 columns.
 
 ```{r}
+#| output: false
 summary(case1402)
 ```
 
 ```{r}
 #| echo: false
-#| outpu: false
+#| output: false
 View(case1402)
 ```
 
-### Transforming Data
+## Transforming Data
 
 General rule of thumb is that yield data should be log transformed. Can either nest the log() function inside other functions, or the easier way would be to create a new column including log transformed data.
 
@@ -87,7 +90,7 @@ General rule of thumb is that yield data should be log transformed. Can either n
 case1402$log_William <- log(case1402$William) #Adds log yield column.
 ```
 
-\### Graphing Data
+## Graphing Data
 
 Create objects for x and y axis labels.
 
@@ -96,8 +99,9 @@ Create objects for x and y axis labels.
 #| outout: false
 
 xlabel <- expression(paste("Ozone (", mu,"L L"^"-1",")"))
-#expression paste used as have complex symbols, cant just enter as a string. 
 ylabel <- expression(paste("Log Yield (kg ha"^"-1",")"))
+
+#expression paste used as have complex symbols, cant just enter as a string. 
 ```
 
 Visualise data in a panel plot of yield versus ozone, facetted by water stress:
@@ -110,13 +114,19 @@ Fig1 <- case1402 |>
   ggplot() +
   geom_point(aes(x = O3, y = log_William, colour = Stress)) +
   facet_wrap(. ~ Stress) +
-  labs(x = xlabel, y = ylabel) +
+  labs(x = xlabel, y = ylabel, title = "Effect of ozone concentration on Yield of William variety soya beans \n in both well-watered and stressed conditions") +
   xlim(0, 0.1) +
-  theme_dark() +
-  ggtitle("Fig 1: Log transformed yield of William variety soya beans as a function of low-level ozone and water stress")
+  theme_gray() +
+  theme(plot.title = element_text(hjust = 0.5, size = 9) ) +
+  scale_color_manual(values = c("Well-watered" = "#f78104", "Stressed" = "#249ea0"))
 
 
-mytheme <- theme(plot.title = element_text(size=(8)))
-print(Fig1 + mytheme)
+print(Fig1)
 
 ```
+Fig 1: Log transformed yield of William variety soya beans as a function \n of low-level ozone and water stress
+
+## Analysis
+
+Question 1 - Fit an ANOVA to the 
+

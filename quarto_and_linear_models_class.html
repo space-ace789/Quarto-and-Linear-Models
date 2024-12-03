@@ -77,12 +77,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       .quarto-title-block .quarto-title-banner h5,
       .quarto-title-block .quarto-title-banner h6
       {
-        color: black;
+        color: white;
       }
 
       .quarto-title-block .quarto-title-banner {
-        color: black;
-background: #42daec;
+        color: white;
+background: #249ea0;
       }
 </style>
 
@@ -95,7 +95,7 @@ background: #42daec;
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
       <h1 class="title">Linear models and Quarto</h1>
-            <p class="subtitle lead">Week 2 Pratical</p>
+            <p class="subtitle lead">Week 2 Practical</p>
                       </div>
   </div>
     
@@ -127,11 +127,11 @@ background: #42daec;
   </ul></li>
   <li><a href="#linear-model-stuff" id="toc-linear-model-stuff" class="nav-link" data-scroll-target="#linear-model-stuff"><span class="header-section-number">2</span> Linear Model Stuff</a>
   <ul class="collapse">
-  <li><a href="#packages" id="toc-packages" class="nav-link" data-scroll-target="#packages"><span class="header-section-number">2.1</span> Packages</a>
-  <ul class="collapse">
-  <li><a href="#examining-dataset" id="toc-examining-dataset" class="nav-link" data-scroll-target="#examining-dataset"><span class="header-section-number">2.1.1</span> Examining Dataset</a></li>
-  <li><a href="#transforming-data" id="toc-transforming-data" class="nav-link" data-scroll-target="#transforming-data"><span class="header-section-number">2.1.2</span> Transforming Data</a></li>
-  </ul></li>
+  <li><a href="#packages" id="toc-packages" class="nav-link" data-scroll-target="#packages"><span class="header-section-number">2.1</span> Packages</a></li>
+  <li><a href="#examining-dataset" id="toc-examining-dataset" class="nav-link" data-scroll-target="#examining-dataset"><span class="header-section-number">2.2</span> Examining Dataset</a></li>
+  <li><a href="#transforming-data" id="toc-transforming-data" class="nav-link" data-scroll-target="#transforming-data"><span class="header-section-number">2.3</span> Transforming Data</a></li>
+  <li><a href="#graphing-data" id="toc-graphing-data" class="nav-link" data-scroll-target="#graphing-data"><span class="header-section-number">2.4</span> Graphing Data</a></li>
+  <li><a href="#analysis" id="toc-analysis" class="nav-link" data-scroll-target="#analysis"><span class="header-section-number">2.5</span> Analysis</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -181,62 +181,33 @@ To do subscript put numbers or text in between ~ ~ e.g.&nbsp;H<sub>2</sub>O</p>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(arm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Using the dataframe case1402, which is from Sleuth3 package. Came from an experiment on effects of drought and 2 low level pollutants (ozone and sulphur dioxide). Used two varieties of soya beans, Forrest and William. Looked at how individual stressors and interactions of them affects them.</p>
-<section id="examining-dataset" class="level3" data-number="2.1.1">
-<h3 data-number="2.1.1" class="anchored" data-anchor-id="examining-dataset"><span class="header-section-number">2.1.1</span> Examining Dataset</h3>
+</section>
+<section id="examining-dataset" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="examining-dataset"><span class="header-section-number">2.2</span> Examining Dataset</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(case1402)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>        Stress  SO2   O3 Forrest William
-1 Well-watered 0.00 0.02    4376    5561
-2 Well-watered 0.00 0.05    4544    5947
-3 Well-watered 0.00 0.07    2806    4273
-4 Well-watered 0.00 0.08    3339    3470
-5 Well-watered 0.00 0.10    3320    3080
-6 Well-watered 0.02 0.02    3747    5092</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(case1402) <span class="co">#lets you see the structure of the dataset</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>'data.frame':   30 obs. of  5 variables:
- $ Stress : Factor w/ 2 levels "Stressed","Well-watered": 2 2 2 2 2 2 2 2 2 2 ...
- $ SO2    : num  0 0 0 0 0 0.02 0.02 0.02 0.02 0.02 ...
- $ O3     : num  0.02 0.05 0.07 0.08 0.1 0.02 0.05 0.07 0.08 0.1 ...
- $ Forrest: int  4376 4544 2806 3339 3320 3747 4570 4635 3613 3259 ...
- $ William: int  5561 5947 4273 3470 3080 5092 4752 4232 2867 3106 ...</code></pre>
-</div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(case1402)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(case1402) <span class="co">#lets you see the structure of the dataset</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Structure is that there are 30 rows and 5 columns.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(case1402)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>          Stress        SO2                O3           Forrest    
- Stressed    :15   Min.   :0.00000   Min.   :0.020   Min.   :2158  
- Well-watered:15   1st Qu.:0.00000   1st Qu.:0.050   1st Qu.:3245  
-                   Median :0.02000   Median :0.070   Median :3478  
-                   Mean   :0.02667   Mean   :0.064   Mean   :3699  
-                   3rd Qu.:0.06000   3rd Qu.:0.080   3rd Qu.:4327  
-                   Max.   :0.06000   Max.   :0.100   Max.   :5573  
-    William    
- Min.   :2101  
- 1st Qu.:2889  
- Median :3428  
- Mean   :3635  
- 3rd Qu.:4263  
- Max.   :5947  </code></pre>
-</div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(case1402)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="transforming-data" class="level3" data-number="2.1.2">
-<h3 data-number="2.1.2" class="anchored" data-anchor-id="transforming-data"><span class="header-section-number">2.1.2</span> Transforming Data</h3>
+<section id="transforming-data" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="transforming-data"><span class="header-section-number">2.3</span> Transforming Data</h2>
 <p>General rule of thumb is that yield data should be log transformed. Can either nest the log() function inside other functions, or the easier way would be to create a new column including log transformed data.</p>
 <div class="cell" data-label="Adding Log transformed column">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>case1402<span class="sc">$</span>log_William <span class="ot">&lt;-</span> <span class="fu">log</span>(case1402<span class="sc">$</span>William) <span class="co">#Adds log yield column.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>case1402<span class="sc">$</span>log_William <span class="ot">&lt;-</span> <span class="fu">log</span>(case1402<span class="sc">$</span>William) <span class="co">#Adds log yield column.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>### Graphing Data</p>
+</section>
+<section id="graphing-data" class="level2" data-number="2.4">
+<h2 data-number="2.4" class="anchored" data-anchor-id="graphing-data"><span class="header-section-number">2.4</span> Graphing Data</h2>
 <p>Create objects for x and y axis labels.</p>
 <div class="cell" data-label="Creating axis title objects" data-outout="false">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>xlabel <span class="ot">&lt;-</span> <span class="fu">expression</span>(<span class="fu">paste</span>(<span class="st">"Ozone ("</span>, mu,<span class="st">"L L"</span><span class="sc">^</span><span class="st">"-1"</span>,<span class="st">")"</span>))</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="co">#expression paste used as have complex symbols, cant just enter as a string. </span></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>ylabel <span class="ot">&lt;-</span> <span class="fu">expression</span>(<span class="fu">paste</span>(<span class="st">"Log Yield (kg ha"</span><span class="sc">^</span><span class="st">"-1"</span>,<span class="st">")"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>xlabel <span class="ot">&lt;-</span> <span class="fu">expression</span>(<span class="fu">paste</span>(<span class="st">"Ozone ("</span>, mu,<span class="st">"L L"</span><span class="sc">^</span><span class="st">"-1"</span>,<span class="st">")"</span>))</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>ylabel <span class="ot">&lt;-</span> <span class="fu">expression</span>(<span class="fu">paste</span>(<span class="st">"Log Yield (kg ha"</span><span class="sc">^</span><span class="st">"-1"</span>,<span class="st">")"</span>))</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co">#expression paste used as have complex symbols, cant just enter as a string. </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Visualise data in a panel plot of yield versus ozone, facetted by water stress:</p>
 <div class="cell" data-label="Visualising Data">
@@ -248,7 +219,11 @@ To do subscript put numbers or text in between ~ ~ e.g.&nbsp;H<sub>2</sub>O</p>
 </div>
 </div>
 </div>
+<p>Fig 1: Log transformed yield of William variety soya beans as a function of low-level ozone and water stress</p>
 </section>
+<section id="analysis" class="level2" data-number="2.5">
+<h2 data-number="2.5" class="anchored" data-anchor-id="analysis"><span class="header-section-number">2.5</span> Analysis</h2>
+<p>Question 1 - Fit an ANOVA to the</p>
 </section>
 </section>
 
