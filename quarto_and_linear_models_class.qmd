@@ -66,7 +66,6 @@ head(case1402)
 str(case1402) #lets you see the structure of the dataset
 ```
 
-
 Structure is that there are 30 rows and 5 columns.
 
 ```{r}
@@ -124,9 +123,33 @@ Fig1 <- case1402 |>
 print(Fig1)
 
 ```
+
 Fig 1: Log transformed yield of William variety soya beans as a function \n of low-level ozone and water stress
 
 ## Analysis
 
-Question 1 - Fit an ANOVA to the 
+Question 1 - Fit an ANOVA to the log transformed yield and effects of water stress
 
+```{r}
+#| label: Crete Linear Model
+WaterLM <- lm(log_William ~ Stress, data = case1402)
+WaterLM
+```
+ Then you put the linear model into an ANOVA
+ 
+```{r}
+WaterAnova <- anova(WaterLM)
+WaterAnova
+```
+There is no significant found therefore there does not appear to be any affect of water stress on yield. 
+
+Question 2 - Fit a linear regression to wiliam yield as a factor of Ozone pollution
+
+```{r}
+OzoneLM <- lm(log_William ~ O3, data = case1402)
+summary(OzoneLM)
+```
+
+Plot the graph 
+
+Question 3: ANCOVA
